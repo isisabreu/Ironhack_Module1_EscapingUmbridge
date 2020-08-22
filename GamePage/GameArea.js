@@ -3,13 +3,15 @@ const ctx = canvas.getContext('2d');
 
 class Board {
   constructor() {
+    canvas.width = 700
+    canvas.height = 500
     this.img = new Image();
     this.img.src = './Images/576.jpg';
     this.y = 0;
     this.x = 0;
     this.width = canvas.width;
     this.height = canvas.height;
-    this.speed = 1;
+    this.speed = 2;
     this.interval = undefined;
     this.frames = 100;
     this.img.onload = () => {
@@ -30,11 +32,11 @@ class Board {
   loadScreen() {
     const logo = new Image();
     logo.src = './Images/Harry.png';
-    ctx.drawImage(logo, 10, 20, 100, 120);
-    ctx.font = '10px Arial';
-    ctx.fillText('Press Start Game', 100, 100);
-    ctx.font = '10px Arial';
-    ctx.fillText('And use x to hold youself in the air!', 100, 120);
+    ctx.drawImage(logo, 10, 20, 200, 200);
+    ctx.font = '30px Arial';
+    ctx.fillText('Press Start Game', 100, 200);
+    ctx.font = '30px Arial';
+    ctx.fillText('And use x to hold youself in the air!', 100, 300);
   }
   gameOver() {
     clearInterval(this.interval);
@@ -49,19 +51,19 @@ class Board {
 
 class Harry {
   constructor() {
-    this.x = 20;
-    this.y = 20;
+    this.x = 40;
+    this.y = 40;
     this.img = new Image();
     this.img.src = './Images/Harry.png';
-    this.height = 20;
-    this.width = 40;
+    this.height = 90;
+    this.width = 120;
   }
   draw() {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    this.y + this.height >= canvas.height ? (this.y = canvas.height - this.height) : (this.y += 1);
+    this.y + this.height >= canvas.height ? (this.y = canvas.height - this.height) : (this.y += 3);
   }
   fly() {
-    this.y -= 20;
+    this.y -= 50;
   }
   crash(obstacle) {
     if (
@@ -90,8 +92,8 @@ class Harry {
 
 class Obstacle {
   constructor() {
-    this.width = 40;
-    this.height = 30;
+    this.width = 140;
+    this.height = 120;
     this.upperimg = new Image();
     this.upperimg.src = './Images/Umbridge.png';
     this.lowerimg = new Image();
@@ -114,19 +116,19 @@ class Obstacle {
     return Math.floor(Math.random() * (max - min) + min);
   }
   randomWindow() {
-    this.lowerY = this.randomNumber(0,20);
-    this.upperY = this.randomNumber(110,130)
+    this.lowerY = this.randomNumber(20,50);
+    this.upperY = this.randomNumber(400,440)
   }
 }
 
 class ChampionObstacle {
   constructor() {
-    this.width = 40;
-    this.height = 30;
+    this.width = 60;
+    this.height = 45;
     this.championimg= new Image();
     this.championimg.src = "./Images/Hogwarts.png";
     this.x = canvas.width;
-    this.champY = 50;
+    this.champY = 250;
   }
 
   draw() {

@@ -1,15 +1,11 @@
-html{
-  background-image: url("./Images/leif-niemczik-Gp8R_D5klig-unsplash.jpg");
-  background-repeat: space;
-  background-size: cover;
-}
-
 body{
     display: flex;
     flex-direction: column;
-    margin-left: 500px;
+    background-image: url("./Images/leif-niemczik-Gp8R_D5klig-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
     
-}
 
 h1 {
     font-family: "HarryPotter";
@@ -184,13 +180,5 @@ canvas {
   @font-face {
       font-family: "HarryPotter";
       src: url("./HarryPotter-ov4z.ttf");
-    }
-  
-  canvas {
-      border: 1px solid black;
-      margin-left: 500px;
-      width: 700px;
-      height: 600px;
-      
     }
   }
