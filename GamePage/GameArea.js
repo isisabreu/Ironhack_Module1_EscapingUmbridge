@@ -29,23 +29,21 @@ class Board {
   }
   loadScreen() {
     const logo = new Image();
-    logo.src = './Images/noun_Harry Potter_1502316.png';
+    logo.src = './Images/Harry.png';
     ctx.drawImage(logo, 10, 20, 100, 120);
-    ctx.font = '20px Arial';
-    ctx.fillText('Press start', 100, 100);
-    ctx.font = '20px Arial';
-    ctx.fillText('And use x to jump!', 100, 120);
+    ctx.font = '10px Arial';
+    ctx.fillText('Press Start Game', 100, 100);
+    ctx.font = '10px Arial';
+    ctx.fillText('And use x to hold youself in the air!', 100, 120);
   }
   gameOver() {
     clearInterval(this.interval);
+    location.href = "./loserpage.html";
   }
-  ruler() {
-    canvas.addEventListener('mousedown', function (clientX) {
-      let rect = canvas.getBoundingClientRect();
-      let clickX = event.clientX - rect.left;
-      let clickY = event.clientY - rect.top;
-      console.log(`clicked on (${Math.floor(clickX)},${Math.floor(clickY)})`);
-    });
+  
+  Win() {
+    clearInterval(this.interval);
+    location.href = "./winnerpage.html";
   }
 }
 
@@ -54,16 +52,16 @@ class Harry {
     this.x = 20;
     this.y = 20;
     this.img = new Image();
-    this.img.src = './Images/noun_Harry Potter_1502316.png';
-    this.height = 35;
-    this.width = 50;
+    this.img.src = './Images/Harry.png';
+    this.height = 20;
+    this.width = 40;
   }
   draw() {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    this.y + this.height >= canvas.height ? (this.y = canvas.height - this.height) : (this.y += 2);
+    this.y + this.height >= canvas.height ? (this.y = canvas.height - this.height) : (this.y += 1);
   }
   fly() {
-    this.y -= 30;
+    this.y -= 20;
   }
   crash(obstacle) {
     if (
@@ -80,13 +78,20 @@ class Harry {
       obstacle.height + obstacle.upperY > this.y
     )
       return true;
+      else if (
+        obstacle.x < this.x + this.width &&
+        obstacle.x + obstacle.width > this.x &&
+        obstacle.champY < this.y + this.height &&
+        obstacle.height + obstacle.champY > this.y
+      )
+        return true;
   }
 }
 
 class Obstacle {
   constructor() {
-    this.width = 200;
-    this.height = 500;
+    this.width = 40;
+    this.height = 30;
     this.upperimg = new Image();
     this.upperimg.src = './Images/Umbridge.png';
     this.lowerimg = new Image();
@@ -96,6 +101,7 @@ class Obstacle {
     this.x = canvas.width;
     this.lowerY = undefined;
     this.upperY = undefined;
+
   }
 
   draw() {
@@ -108,17 +114,26 @@ class Obstacle {
     return Math.floor(Math.random() * (max - min) + min);
   }
   randomWindow() {
-    let p1 = 0,
-      p2 = 0;
-    while (p2 < 10) {
-      p1 = this.randomNumber(70, canvas.height - 10);
-      p2 = this.randomNumber(0, p1 - 100);
-    }
-    this.lowerY = p1;
-    this.upperY = p2 - this.height;
+    this.lowerY = this.randomNumber(0,20);
+    this.upperY = this.randomNumber(110,130)
   }
 }
 
+class ChampionObstacle {
+  constructor() {
+    this.width = 40;
+    this.height = 30;
+    this.championimg= new Image();
+    this.championimg.src = "./Images/Hogwarts.png";
+    this.x = canvas.width;
+    this.champY = 50;
+  }
+
+  draw() {
+    this.x--;
+    ctx.drawImage(this.championimg, this.x, this.champY, this.width, this.height);
+  }
+}
 // Instances
 const board = new Board(canvas);
 const harry = new Harry();
@@ -127,7 +142,6 @@ const harry = new Harry();
 let obstacleOnScreen = [];
 let frames = 0;
 let points = 0;
-board.ruler(canvas);
 
 // Listeners
 document.addEventListener('keydown', ({ keyCode }) => {
@@ -147,6 +161,7 @@ const startGame = () => {
   board.interval = setInterval(updategame, 1000 / 60);
 };
 
+let hasCastle = false;
 const updategame = () => {
   frames++;
   board.clean();
@@ -158,14 +173,27 @@ const updategame = () => {
     obstacle.randomWindow();
     obstacleOnScreen.push(obstacle);
   }
+  let rand = Math.random();
+  
+  if (frames > 1100 && rand > 0.999 && !hasCastle) {
+    hasCastle = true;
+    const champObstacle = new ChampionObstacle();
+    obstacleOnScreen.push(champObstacle);
+  }
 
-  obstacleOnScreen.forEach((obstacle) => {
-    if (obstacle.x + obstacle.width <= 0) {
+  obstacleOnScreen.forEach((obs) => {
+    if (obs.x + obs.width <= 0) {
       obstacleOnScreen.shift();
       points++;
     }
-    obstacle.draw();
-    if (harry.crash(obstacle)) board.gameOver();
+    obs.draw();
+    if (harry.crash(obs)) {
+      if (obs instanceof ChampionObstacle) {
+        board.Win();
+      } else {
+        board.gameOver(); 
+      }
+    }
   });
 
   ctx.font = '9px Arial';
