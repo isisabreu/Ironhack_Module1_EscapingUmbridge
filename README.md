@@ -1,4 +1,4 @@
-# Ironhack_Module1_EscapingUmbridge
+# Escaping Umbridge
 ## Introduction
 Escaping Umbridge is a game based on Harry Potter's story in which you need to dodge from obstacles like Dementors and Umbridge clones to get safely to Hogwarts.
 In this game we use some techniques learned through the module 1 of Web Delevopment course at Ironhack such as the use of Canvas in js., object orietation and DOM manipulation.
