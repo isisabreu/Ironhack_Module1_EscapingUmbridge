@@ -1,56 +1,21 @@
-body {
-  font: 200 16px/1.5;
-  margin: 0;
-  background-image: url("./Images/leif-niemczik-Gp8R_D5klig-unsplash.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-section {
-  display: flex;
-  padding: 0px 30px 20px 30px;
-  align-items: center;
+
+body{
+    flex-direction: column;
+    margin: 0;
+    background-image: url("./Images/leif-niemczik-Gp8R_D5klig-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.bigtitle {
-  font-family: "HarryPotter";
-  padding-top: 220px;
-}
-h1{
-  font-size: 98px;
-  color: rgb(247, 177, 1);
-  width: max-content;
-}
-p{
-  font-size: 20px;
-  font-family: 'Lora';
-  color:whitesmoke;
+h1 {
+    font-family: "HarryPotter";
+    font-size: 98px;
+    color: rgb(247, 177, 1);
+    width: max-content;
+    padding-left: 500px;
 }
 
-.second-div {
-  padding-top: 220px;
-  margin-left: 100px;
-}
-.instructions {
-  font-family: 'Lora';
-  font-weight: bold;
-  color: whitesmoke;
-  font-size: 20px;
-  padding: auto;
-  justify-content: space-around;
-}
-
-
-@font-face {
-  font-family: "HarryPotter";
-  src: url("./HarryPotter-ov4z.ttf");
-}
-
-@font-face{
-  font-family: 'Lora';
-  src: url("./Lora-VariableFont_wght.ttf");
-}
-
-.startbutton{
+#start-button{
   width: 220px;
   height: 50px;
   border: none;
@@ -65,7 +30,7 @@ p{
   font-size: 20px;
 }
 
-.startbutton:before {
+#start-button:before {
   content: '';
   background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #ff0000);
   position: absolute;
@@ -82,19 +47,19 @@ p{
   border-radius: 10px;
 }
 
-.startbutton:active {
+#start-button:active {
   color: rgb(170, 36, 36)
 }
 
-.startbutton:active:after {
+#start-button:active:after {
   background: transparent;
 }
 
-.startbutton:hover:before {
+#start-button:hover:before {
   opacity: 1;
 }
 
-.startbutton:after {
+#start-button:after {
   z-index: -1;
   content: '';
   position: absolute;
@@ -113,6 +78,15 @@ p{
 }
 
 
+@font-face {
+    font-family: "HarryPotter";
+    src: url("./HarryPotter-ov4z.ttf");
+  }
 
-
-
+canvas {
+    border: 1px solid black;
+    margin-left: 500px;
+    width: 700px;
+    height: 600px;
+    
+  }
