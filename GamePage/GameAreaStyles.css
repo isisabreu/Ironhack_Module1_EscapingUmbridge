@@ -1,10 +1,14 @@
+html{
+  background-image: url("./Images/leif-niemczik-Gp8R_D5klig-unsplash.jpg");
+  background-repeat: space;
+  background-size: cover;
+}
 
 body{
+    display: flex;
     flex-direction: column;
-    margin: 0;
-    background-image: url("./Images/leif-niemczik-Gp8R_D5klig-unsplash.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    margin-left: 500px;
+    
 }
 
 h1 {
@@ -90,4 +94,103 @@ canvas {
     width: 700px;
     height: 600px;
     
+  }
+
+  @media (min-width: 650px) and (max-width: 999px) {
+    
+    html{
+      background-image: url("./Images/leif-niemczik-Gp8R_D5klig-unsplash.jpg");
+      background-repeat: space;
+      background-size: cover;
+    }
+    body{    
+      display: flex;
+      flex-direction: column;
+      margin-left: 500px;
+  }
+  
+  h1 {
+      font-family: "HarryPotter";
+      font-size: 98px;
+      color: rgb(247, 177, 1);
+      width: max-content;
+      padding-left: 500px;
+  }
+  
+  #start-button{
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #ff0000;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family: "Lora";
+    font-size: 20px;
+    margin-left: 50px;
+  }
+  
+  #start-button:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+  }
+  
+  #start-button:active {
+    color: rgb(170, 36, 36)
+  }
+  
+  #start-button:active:after {
+    background: transparent;
+  }
+  
+  #start-button:hover:before {
+    opacity: 1;
+  }
+  
+  #start-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(170, 36, 36);
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+  }
+  
+  @keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+  }
+  
+  
+  @font-face {
+      font-family: "HarryPotter";
+      src: url("./HarryPotter-ov4z.ttf");
+    }
+  
+  canvas {
+      border: 1px solid black;
+      margin-left: 500px;
+      width: 700px;
+      height: 600px;
+      
+    }
   }
